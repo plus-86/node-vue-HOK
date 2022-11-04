@@ -6,12 +6,19 @@ module.exports = (app) => {
     const Category = require('../../models/Category')
     // 创建子路由
     const router = express.Router()
-    router.post('/categories', async (req, res) => {
-        let category = await Category.create({
-            name: req.body.name
+    router.route('/categories')
+        .post(async (req, res) => {
+            let category = await Category.create({
+                name: req.body.name
+            })
+            res.send(category)
         })
-        res.send(category)
-    })
+        .get(async (req, res) => {
+            let list = await Category.find().select('-__v')
+            res.send(list)
+        })
+
+
 
     // 把上面所有路由挂载到/admin/api
     app.use('/admin/api', router)

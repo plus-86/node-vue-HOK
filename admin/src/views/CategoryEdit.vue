@@ -23,10 +23,10 @@ export default {
   methods: {
     async save() {
       let res = await addCategory(this.model)
-      return console.log(res)
+      // 验证todo
       this.$router.push('/categories/list')
       this.$message({
-        type: 'sucesss',
+        type: 'success',
         message: '保存成功'
       })
     }

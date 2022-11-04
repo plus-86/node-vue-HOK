@@ -9,7 +9,8 @@ const routes = [
     name: 'home',
     component: () => import('@/views/Main.vue'),
     children: [
-      { path: 'categories/create', component: () => import('@/views/CategoryEdit.vue') }
+      { path: 'categories/create', component: () => import('@/views/CategoryEdit.vue') },
+      { path: 'categories/list', component: () => import('@/views/CategoryList.vue') }
     ]
   }
 ]
