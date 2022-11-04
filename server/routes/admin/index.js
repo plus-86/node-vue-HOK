@@ -27,6 +27,12 @@ module.exports = (app) => {
             let category = await Category.findByIdAndUpdate(req.params.id, { name: req.body.name })
             res.send(category)
         })
+        .delete(async (req, res) => {
+            await Category.findByIdAndDelete(req.params.id)
+            res.send({
+                success: true
+            })
+        })
 
 
 

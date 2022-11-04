@@ -12,6 +12,9 @@
             size="small"
             >编辑</el-button
           >
+          <el-button @click="remove(scope.row)" type="text" size="small"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -19,7 +22,7 @@
 </template>
 
 <script>
-import { getCategoryList } from '@/request/api.js'
+import { getCategoryList, removeCategoryById } from '@/request/api.js'
 export default {
   data() {
     return {
@@ -31,6 +34,20 @@ export default {
       let res = await getCategoryList()
       // 验证todo
       this.items = res.data
+    },
+    async remove(row) {
+      this.$confirm(`是否删除 "${row.name}"`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        let res = await removeCategoryById(row._id)
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+        this.fetch()
+      })
     }
   },
   created() {
