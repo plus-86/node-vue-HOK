@@ -21,3 +21,4 @@ selenium-debug.log
 
 ##
 *.env
+*.http
