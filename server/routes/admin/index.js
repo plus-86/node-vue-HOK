@@ -18,6 +18,16 @@ module.exports = (app) => {
             res.send(list)
         })
 
+    router.route('/categories/:id')
+        .get(async (req, res) => {
+            let category = await Category.findById(req.params.id)
+            res.send(category)
+        })
+        .put(async (req, res) => {
+            let category = await Category.findByIdAndUpdate(req.params.id, { name: req.body.name })
+            res.send(category)
+        })
+
 
 
     // 把上面所有路由挂载到/admin/api

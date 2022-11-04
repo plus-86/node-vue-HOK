@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>新建分类</h1>
+    <h1>{{ id ? '编辑' : '新建' }}分类</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="名称">
         <el-input v-model="model.name"> </el-input>
@@ -13,8 +13,16 @@
 </template>
 
 <script>
-import { addCategory } from '@/request/api.js'
+import {
+  addCategory,
+  getCategoryById,
+  upateCategoryById
+} from '@/request/api.js'
 export default {
+  // 获取上个页面放到url上传过来的参数
+  props: {
+    id: {}
+  },
   data() {
     return {
       model: {}
@@ -22,14 +30,33 @@ export default {
   },
   methods: {
     async save() {
-      let res = await addCategory(this.model)
-      // 验证todo
-      this.$router.push('/categories/list')
-      this.$message({
-        type: 'success',
-        message: '保存成功'
-      })
+      let res
+      if (this.id) {
+        res = await upateCategoryById(this.model, this.id)
+        // 验证todo
+        this.$router.push('/categories/list')
+        this.$message({
+          type: 'success',
+          message: '更新成功'
+        })
+      } else {
+        res = await addCategory(this.model)
+        // 验证todo
+        this.$router.push('/categories/list')
+        this.$message({
+          type: 'success',
+          message: '保存成功'
+        })
+      }
+    },
+    async fetch() {
+      let res = await getCategoryById(this.id)
+      this.model = res.data
     }
+  },
+  created() {
+    // 如果有id则去获取分类
+    this.id && this.fetch()
   }
 }
 </script>
