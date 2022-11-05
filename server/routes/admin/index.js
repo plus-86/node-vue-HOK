@@ -57,4 +57,15 @@ module.exports = (app) => {
         next()
     }, router)
 
+    // multer 用于生成上传文件的相关信息,并存储到指定位置
+    const multer = require('multer')
+    // 定义中间件,将用户上传文件保存到本js文件绝对目录往上两级的uploads文件夹里
+    const upload = multer({ dest: __dirname + '/../../uploads' })
+    // 调用该中间件后,会将文件相关信息保存到req.file里
+    app.post('/admin/api/upload', upload.single('file'), (req, res) => {
+        const { file } = req
+        // file属性内有个自动生成的filename属性,做成一个url返给用户,用于访问该文件
+        file.url = `http://localhost:3000/uploads/${file.filename}`
+        res.send(file)
+    })
 }

@@ -4,8 +4,11 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
+import instance from './request/request'
 
 Vue.config.productionTip = false
+
+Vue.prototype.$axios = instance
 
 new Vue({
   router,
