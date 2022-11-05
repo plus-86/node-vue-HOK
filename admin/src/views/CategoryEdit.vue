@@ -2,6 +2,16 @@
   <div class="about">
     <h1>{{ id ? '编辑' : '新建' }}分类</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
+      <el-form-item label="上级分类">
+        <el-select v-model="model.parent">
+          <el-option
+            v-for="item in parents"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+          ></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="名称">
         <el-input v-model="model.name"> </el-input>
       </el-form-item>
@@ -16,7 +26,8 @@
 import {
   addCategory,
   getCategoryById,
-  upateCategoryById
+  upateCategoryById,
+  getCategoryList
 } from '@/request/api.js'
 export default {
   // 获取上个页面放到url上传过来的参数
@@ -25,7 +36,8 @@ export default {
   },
   data() {
     return {
-      model: {}
+      model: {},
+      parents: []
     }
   },
   methods: {
@@ -52,9 +64,15 @@ export default {
     async fetch() {
       let res = await getCategoryById(this.id)
       this.model = res.data
+    },
+    async fetchParents() {
+      // 获取上级分类下拉菜单
+      let res = await getCategoryList()
+      this.parents = res.data
     }
   },
   created() {
+    this.fetchParents()
     // 如果有id则去获取分类
     this.id && this.fetch()
   }

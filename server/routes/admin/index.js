@@ -8,13 +8,14 @@ module.exports = (app) => {
     const router = express.Router()
     router.route('/categories')
         .post(async (req, res) => {
-            let category = await Category.create({
-                name: req.body.name
-            })
+            let category = await Category.create(
+                req.body
+            )
             res.send(category)
         })
         .get(async (req, res) => {
-            let list = await Category.find().select('-__v')
+            // 把关联的模型填充到 parent 字段
+            let list = await Category.find().populate('parent')
             res.send(list)
         })
 
@@ -24,7 +25,7 @@ module.exports = (app) => {
             res.send(category)
         })
         .put(async (req, res) => {
-            let category = await Category.findByIdAndUpdate(req.params.id, { name: req.body.name })
+            let category = await Category.findByIdAndUpdate(req.params.id, req.body)
             res.send(category)
         })
         .delete(async (req, res) => {
