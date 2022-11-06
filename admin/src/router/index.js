@@ -19,7 +19,11 @@ const routes = [
 
       { path: 'heroes/edit/:id', component: () => import('@/views/HeroEdit.vue'), props: true },
       { path: 'heroes/create', component: () => import('@/views/HeroEdit.vue') },
-      { path: 'heroes/list', component: () => import('@/views/HeroList.vue') }
+      { path: 'heroes/list', component: () => import('@/views/HeroList.vue') },
+
+      { path: 'articles/edit/:id', component: () => import('@/views/ArticleEdit.vue'), props: true },
+      { path: 'articles/create', component: () => import('@/views/ArticleEdit.vue') },
+      { path: 'articles/list', component: () => import('@/views/ArticleList.vue') }
     ]
   }
 ]

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { addItem, getItemById, upateItemById } from '@/request/api.js'
+import { addItem, getItemById, updateItemById } from '@/request/api.js'
 export default {
   // 获取上个页面放到url上传过来的参数
   props: {
@@ -45,7 +45,7 @@ export default {
     async save() {
       let res
       if (this.id) {
-        res = await upateItemById(this.model, this.id)
+        res = await updateItemById(this.model, this.id)
         // 验证todo
         this.$router.push('/items/list')
         this.$message({

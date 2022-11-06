@@ -1,19 +1,22 @@
 <template>
   <div class="about">
-    <h1>{{ id ? '编辑' : '新建' }}分类</h1>
+    <h1>{{ id ? '编辑' : '新建' }}文章</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="上级分类">
-        <el-select v-model="model.parent">
+      <el-form-item label="所属分类">
+        <el-select v-model="model.categories" multiple>
           <el-option
-            v-for="item in parents"
+            v-for="item in categories"
             :key="item._id"
             :label="item.name"
             :value="item._id"
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="名称">
-        <el-input v-model="model.name"> </el-input>
+      <el-form-item label="标题">
+        <el-input v-model="model.title"> </el-input>
+      </el-form-item>
+      <el-form-item label="详情">
+        <el-input type="textarea" v-model="model.body"> </el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit"> 保存 </el-button>
@@ -24,9 +27,9 @@
 
 <script>
 import {
-  addCategory,
-  getCategoryById,
-  updateCategoryById,
+  addArticle,
+  getArticleById,
+  updateArticleById,
   getCategoryList
 } from '@/request/api.js'
 export default {
@@ -37,24 +40,24 @@ export default {
   data() {
     return {
       model: {},
-      parents: []
+      categories: []
     }
   },
   methods: {
     async save() {
       let res
       if (this.id) {
-        res = await updateCategoryById(this.model, this.id)
+        res = await updateArticleById(this.model, this.id)
         // 验证todo
-        this.$router.push('/categories/list')
+        this.$router.push('/articles/list')
         this.$message({
           type: 'success',
           message: '更新成功'
         })
       } else {
-        res = await addCategory(this.model)
+        res = await addArticle(this.model)
         // 验证todo
-        this.$router.push('/categories/list')
+        this.$router.push('/articles/list')
         this.$message({
           type: 'success',
           message: '保存成功'
@@ -62,17 +65,17 @@ export default {
       }
     },
     async fetch() {
-      let res = await getCategoryById(this.id)
+      let res = await getArticleById(this.id)
       this.model = res.data
     },
-    async fetchParents() {
+    async fetchCategories() {
       // 获取上级分类下拉菜单
       let res = await getCategoryList()
-      this.parents = res.data
+      this.categories = res.data
     }
   },
   created() {
-    this.fetchParents()
+    this.fetchCategories()
     // 如果有id则去获取分类
     this.id && this.fetch()
   }

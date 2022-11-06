@@ -147,7 +147,7 @@
 import {
   addHero,
   getHeroById,
-  upateHeroById,
+  updateHeroById,
   getCategoryList,
   getItemList
 } from '@/request/api.js'
@@ -179,7 +179,7 @@ export default {
     async save() {
       let res
       if (this.id) {
-        res = await upateHeroById(this.model, this.id)
+        res = await updateHeroById(this.model, this.id)
         // 验证todo
         this.$router.push('/heroes/list')
         this.$message({
