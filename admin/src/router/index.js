@@ -12,9 +12,14 @@ const routes = [
       { path: 'categories/edit/:id', component: () => import('@/views/CategoryEdit.vue'), props: true }, // props: true代表获取上个页面放到url上传过来的参数
       { path: 'categories/create', component: () => import('@/views/CategoryEdit.vue') },
       { path: 'categories/list', component: () => import('@/views/CategoryList.vue') },
+
       { path: 'items/edit/:id', component: () => import('@/views/ItemEdit.vue'), props: true },
       { path: 'items/create', component: () => import('@/views/ItemEdit.vue') },
-      { path: 'items/list', component: () => import('@/views/ItemList.vue') }
+      { path: 'items/list', component: () => import('@/views/ItemList.vue') },
+
+      { path: 'heroes/edit/:id', component: () => import('@/views/HeroEdit.vue'), props: true },
+      { path: 'heroes/create', component: () => import('@/views/HeroEdit.vue') },
+      { path: 'heroes/list', component: () => import('@/views/HeroList.vue') }
     ]
   }
 ]

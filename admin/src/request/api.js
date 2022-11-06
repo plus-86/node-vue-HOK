@@ -19,3 +19,13 @@ export const getItemById = (params) => instance.get(`/rest/items/${params}`)
 export const upateItemById = (params, id) => instance.put(`/rest/items/${id}`, params)
 
 export const removeItemById = (id) => instance.delete(`/rest/items/${id}`)
+
+export const addHero = (params) => instance.post('/rest/heroes', params)
+
+export const getHeroList = () => instance.get('/rest/heroes')
+
+export const getHeroById = (params) => instance.get(`/rest/heroes/${params}`)
+
+export const upateHeroById = (params, id) => instance.put(`/rest/heroes/${id}`, params)
+
+export const removeHeroById = (id) => instance.delete(`/rest/heroes/${id}`)

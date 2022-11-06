@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>{{ id ? '编辑' : '新建' }}物品</h1>
+    <h1>{{ id ? '编辑' : '新建' }}英雄</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="名称">
         <el-input v-model="model.name"> </el-input>
@@ -14,7 +14,7 @@
           :show-file-list="false"
           :on-success="afterUpload"
         >
-          <img v-if="model.icon" :src="model.icon" class="avatar" />
+          <img v-if="model.avatar" :src="model.avatar" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { addItem, getItemById, upateItemById } from '@/request/api.js'
+import { addHero, getHeroById, upateHeroById } from '@/request/api.js'
 export default {
   // 获取上个页面放到url上传过来的参数
   props: {
@@ -40,22 +40,22 @@ export default {
   methods: {
     afterUpload(res) {
       // 需要$set设置为响应式(目标对象，添加的属性名，添加的属性值)
-      this.$set(this.model, 'icon', res.url)
+      this.$set(this.model, 'avatar', res.url)
     },
     async save() {
       let res
       if (this.id) {
-        res = await upateItemById(this.model, this.id)
+        res = await upateHeroById(this.model, this.id)
         // 验证todo
-        this.$router.push('/items/list')
+        this.$router.push('/heroes/list')
         this.$message({
           type: 'success',
           message: '更新成功'
         })
       } else {
-        res = await addItem(this.model)
+        res = await addHero(this.model)
         // 验证todo
-        this.$router.push('/items/list')
+        this.$router.push('/heroes/list')
         this.$message({
           type: 'success',
           message: '保存成功'
@@ -63,7 +63,7 @@ export default {
       }
     },
     async fetch() {
-      let res = await getItemById(this.id)
+      let res = await getHeroById(this.id)
       this.model = res.data
     }
   },
