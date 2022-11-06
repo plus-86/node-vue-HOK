@@ -1,4 +1,6 @@
 import instance from "./request";
+// 上传图片
+export const uploadFile = (params) => instance.post('/upload', params)
 
 export const addCategory = (params) => instance.post('/rest/categories', params)
 

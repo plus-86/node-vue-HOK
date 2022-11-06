@@ -16,7 +16,11 @@
         <el-input v-model="model.title"> </el-input>
       </el-form-item>
       <el-form-item label="详情">
-        <VueEditor v-model="model.body"></VueEditor>
+        <VueEditor
+          useCustomImageHandler
+          @image-added="handleImageAdded"
+          v-model="model.body"
+        ></VueEditor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit"> 保存 </el-button>
@@ -32,7 +36,8 @@ import {
   addArticle,
   getArticleById,
   updateArticleById,
-  getCategoryList
+  getCategoryList,
+  uploadFile
 } from '@/request/api.js'
 export default {
   // 获取上个页面放到url上传过来的参数
@@ -77,6 +82,16 @@ export default {
       // 获取上级分类下拉菜单
       let res = await getCategoryList()
       this.categories = res.data
+    },
+    async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
+      // 转化图片
+      const formData = new FormData()
+      formData.append('file', file)
+      // 上传图片到接口
+      const res = await uploadFile(formData)
+      // 插入上传到接口的图片路径
+      Editor.insertEmbed(cursorLocation, 'image', res.data.url)
+      resetUploader()
     }
   },
   created() {
