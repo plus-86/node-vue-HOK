@@ -5,7 +5,7 @@ const heroSchema = new mongoose.Schema({
     avatar: { type: String },
     title: { type: String },
     // 英雄分类关联到Category表,一个英雄可能属于多个分类所以是数组
-    Categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }],
+    categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }],
     // 评分
     scores: {
         difficult: { type: Number },
