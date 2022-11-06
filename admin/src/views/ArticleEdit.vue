@@ -16,7 +16,7 @@
         <el-input v-model="model.title"> </el-input>
       </el-form-item>
       <el-form-item label="详情">
-        <el-input type="textarea" v-model="model.body"> </el-input>
+        <VueEditor v-model="model.body"></VueEditor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit"> 保存 </el-button>
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { VueEditor } from 'vue2-editor'
+
 import {
   addArticle,
   getArticleById,
@@ -42,6 +44,9 @@ export default {
       model: {},
       categories: []
     }
+  },
+  components: {
+    VueEditor
   },
   methods: {
     async save() {
