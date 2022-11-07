@@ -27,7 +27,11 @@ const routes = [
 
       { path: 'ads/edit/:id', component: () => import('@/views/AdEdit.vue'), props: true },
       { path: 'ads/create', component: () => import('@/views/AdEdit.vue') },
-      { path: 'ads/list', component: () => import('@/views/AdList.vue') }
+      { path: 'ads/list', component: () => import('@/views/AdList.vue') },
+
+      { path: 'admin_users/edit/:id', component: () => import('@/views/AdminUserEdit.vue'), props: true },
+      { path: 'admin_users/create', component: () => import('@/views/AdminUserEdit.vue') },
+      { path: 'admin_users/list', component: () => import('@/views/AdminUserList.vue') }
     ]
   }
 ]

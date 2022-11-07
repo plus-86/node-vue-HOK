@@ -51,3 +51,13 @@ export const getAdById = (params) => instance.get(`/rest/ads/${params}`)
 export const updateAdById = (params, id) => instance.put(`/rest/ads/${id}`, params)
 
 export const removeAdById = (id) => instance.delete(`/rest/ads/${id}`)
+
+export const addAdminUser = (params) => instance.post('/rest/admin_users', params)
+
+export const getAdminUserList = () => instance.get('/rest/admin_users')
+
+export const getAdminUserById = (params) => instance.get(`/rest/admin_users/${params}`)
+
+export const updateAdminUserById = (params, id) => instance.put(`/rest/admin_users/${id}`, params)
+
+export const removeAdminUserById = (id) => instance.delete(`/rest/admin_users/${id}`)
