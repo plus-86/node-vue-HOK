@@ -23,7 +23,11 @@ const routes = [
 
       { path: 'articles/edit/:id', component: () => import('@/views/ArticleEdit.vue'), props: true },
       { path: 'articles/create', component: () => import('@/views/ArticleEdit.vue') },
-      { path: 'articles/list', component: () => import('@/views/ArticleList.vue') }
+      { path: 'articles/list', component: () => import('@/views/ArticleList.vue') },
+
+      { path: 'ads/edit/:id', component: () => import('@/views/AdEdit.vue'), props: true },
+      { path: 'ads/create', component: () => import('@/views/AdEdit.vue') },
+      { path: 'ads/list', component: () => import('@/views/AdList.vue') }
     ]
   }
 ]

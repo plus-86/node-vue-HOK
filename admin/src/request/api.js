@@ -41,3 +41,13 @@ export const getArticleById = (params) => instance.get(`/rest/articles/${params}
 export const updateArticleById = (params, id) => instance.put(`/rest/articles/${id}`, params)
 
 export const removeArticleById = (id) => instance.delete(`/rest/articles/${id}`)
+
+export const addAd = (params) => instance.post('/rest/ads', params)
+
+export const getAdList = () => instance.get('/rest/ads')
+
+export const getAdById = (params) => instance.get(`/rest/ads/${params}`)
+
+export const updateAdById = (params, id) => instance.put(`/rest/ads/${id}`, params)
+
+export const removeAdById = (id) => instance.delete(`/rest/ads/${id}`)

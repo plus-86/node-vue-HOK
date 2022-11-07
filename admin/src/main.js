@@ -6,6 +6,8 @@ import store from './store'
 import './plugins/element.js'
 import instance from './request/request'
 
+import '@/assets/style/style.css'
+
 Vue.config.productionTip = false
 
 Vue.prototype.$axios = instance
