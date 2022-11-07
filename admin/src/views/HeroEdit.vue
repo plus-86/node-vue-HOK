@@ -15,7 +15,7 @@
             <!-- on-success是图片上传后的回调,第一个参是图片信息 -->
             <el-upload
               class="avatar-uploader"
-              :action="$axios.defaults.baseURL + '/upload'"
+              :action="uploadUrl"
               :show-file-list="false"
               :on-success="afterUpload"
             >
@@ -116,7 +116,7 @@
                 <!-- 给model.skills[].icon响应式赋值 -->
                 <el-upload
                   class="avatar-uploader"
-                  :action="$axios.defaults.baseURL + '/upload'"
+                  :action="uploadUrl"
                   :show-file-list="false"
                   :on-success="(res) => $set(item, 'icon', res.url)"
                 >
