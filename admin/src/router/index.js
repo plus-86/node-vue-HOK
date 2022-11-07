@@ -7,7 +7,8 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/Login.vue')
+    component: () => import('@/views/Login.vue'),
+    meta: { isPublic: true } // 当访问/login路径，可以在beforeEach的to.meta.isPublic读到
   },
   {
     path: '/',
@@ -41,10 +42,19 @@ const routes = [
   }
 ]
 
+
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  // 不是login页且没有token，跳转到登录页
+  if (!to.meta.isPublic && !localStorage.token) {
+    next('/login')
+  }
+  next()
+})
 export default router
