@@ -1,6 +1,8 @@
 import instance from "./request";
 // 上传图片
 export const uploadFile = (params) => instance.post('/upload', params)
+// 登录
+export const Login = (params) => instance.post('/login', params)
 
 export const addCategory = (params) => instance.post('/rest/categories', params)
 

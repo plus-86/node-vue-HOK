@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { Login } from '@/request/api.js'
+
 export default {
   data() {
     return {
@@ -24,8 +26,16 @@ export default {
     }
   },
   methods: {
-    login() {
-      console.log(this.model)
+    async login() {
+      let res = await Login(this.model)
+      // sessionStorage.token = res.data.token
+      localStorage.token = res.data.token
+
+      this.$router.push('/')
+      this.$message({
+        type: 'success',
+        message: '登录成功' // 可以让服务端传
+      })
     }
   }
 }

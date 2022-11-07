@@ -19,6 +19,8 @@ require('./routes/admin')(app)
 
 require('./plugins/db')(app)
 
+app.set('APPSECRET', process.env.APPSECRET)
+
 
 const PORT = process.env.PORT || 3001
 
