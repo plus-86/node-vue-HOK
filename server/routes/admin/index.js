@@ -3,6 +3,10 @@
 // 这样在该文件就可以引用入口文件的app对象了
 module.exports = (app) => {
     const express = require('express')
+    const AdminUser = require('../../models/AdminUser')
+    const assert = require('http-assert')
+    const jwt = require('jsonwebtoken')
+
     // 创建子路由
     const router = express.Router({
         // 把父级路由的 params 合并进来，让子路由可以读到 :resource

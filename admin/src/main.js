@@ -11,6 +11,21 @@ import '@/assets/style/style.css'
 Vue.config.productionTip = false
 
 Vue.prototype.$axios = instance
+// 给全局挂载data，methods等
+Vue.mixin({
+  computed: {
+    uploadUrl() {
+      return this.$axios.defaults.baseURL + '/upload'
+    }
+  },
+  methods: {
+    getAuthHeaders() {
+      return {
+        Authorization: `Bearer ${localStorage.token || ''}`
+      }
+    }
+  }
+})
 
 new Vue({
   router,
