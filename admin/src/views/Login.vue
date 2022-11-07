@@ -30,6 +30,7 @@ export default {
       let res = await Login(this.model)
       // sessionStorage.token = res.data.token
       localStorage.token = res.data.token
+      localStorage.username = res.data.username
 
       this.$router.push('/')
       this.$message({

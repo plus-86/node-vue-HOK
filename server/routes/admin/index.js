@@ -88,7 +88,7 @@ module.exports = (app) => {
         const token = jwt.sign({
             id: user._id,
         }, app.get('APPSECRET'))// 这里的get方法和请求的get方法实际上是同一个，但是它可以通过传参判断是http请求或获取参数配置
-        res.send({ token })
+        res.send({ token, username })
     })
 
     // 错误处理函数
