@@ -41,40 +41,19 @@
       </div>
     </div>
     <!-- end of nav icons -->
-    <m-card icon="menu" title="新闻资讯">
-      <div class="card-body pt-3">
-        <div class="nav jc-between">
-          <div class="nav-item active">
-            <div class="nav-link">热门</div>
-          </div>
-          <div class="nav-item">
-            <div class="nav-link">热门</div>
-          </div>
-          <div class="nav-item">
-            <div class="nav-link">热门</div>
-          </div>
-          <div class="nav-item">
-            <div class="nav-link">热门</div>
-          </div>
-          <div class="nav-item">
-            <div class="nav-link">热门</div>
-          </div>
+
+    <m-list-card icon="menu" title="新闻资讯" :categories="newsCats">
+      <!-- 获取子组件内，名为items的具名插槽所绑定的attr category -->
+      <template #items="{ category }">
+        <!-- 遍历 category.newsList 渲染每一页幻灯片的新闻-->
+        <div class="py-2" v-for="(item, i) in category.newsList" :key="i">
+          <span>[{{ item.categoryName }}]</span>
+          <span>|</span>
+          <span>{{ item.title }}</span>
+          <span>{{ item.date }}</span>
         </div>
-        <div class="pt-3">
-          <swiper>
-            <swiper-slide v-for="m in 5" :key="m">
-              <div class="py-2" v-for="n in 5" :key="n">
-                <span>[新闻]</span>
-                <span>|</span>
-                <span>11月2日全服不停机更新公告</span>
-                <span>11/09</span>
-              </div>
-            </swiper-slide>
-          </swiper>
-        </div>
-      </div>
-    </m-card>
-    <m-card icon="menu" title="新闻资讯"></m-card>
+      </template>
+    </m-list-card>
   </div>
 </template>
 
@@ -82,6 +61,158 @@
 export default {
   data() {
     return {
+      newsCats: [
+        {
+          name: '热门',
+          newsList: [
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            }
+          ]
+        },
+        {
+          name: '新闻',
+          newsList: [
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            }
+          ]
+        },
+        {
+          name: '新闻',
+          newsList: [
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            }
+          ]
+        },
+        {
+          name: '新闻',
+          newsList: [
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            }
+          ]
+        },
+        {
+          name: '新闻',
+          newsList: [
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            },
+            {
+              categoryName: '公告',
+              title: '11月2日全服不停机更新公告',
+              date: '06/02'
+            }
+          ]
+        }
+      ],
       swiperOptions: {
         pagination: {
           el: '.pagination-home'
