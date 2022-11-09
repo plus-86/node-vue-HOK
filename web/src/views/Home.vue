@@ -27,6 +27,7 @@
         slot="pagination"
       ></div>
     </swiper>
+    <!-- end of swiper -->
     <div class="nav-icons bg-white mt-3 text-center pt-3 text-dark-1">
       <div class="d-flex flex-wrap">
         <div class="nav-item mb-3" v-for="n in 10" :key="n">
@@ -39,6 +40,41 @@
         <span>收起</span>
       </div>
     </div>
+    <!-- end of nav icons -->
+    <m-card icon="menu" title="新闻资讯">
+      <div class="card-body pt-3">
+        <div class="nav jc-between">
+          <div class="nav-item active">
+            <div class="nav-link">热门</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">热门</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">热门</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">热门</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">热门</div>
+          </div>
+        </div>
+        <div class="pt-3">
+          <swiper>
+            <swiper-slide v-for="m in 5" :key="m">
+              <div class="py-2" v-for="n in 5" :key="n">
+                <span>[新闻]</span>
+                <span>|</span>
+                <span>11月2日全服不停机更新公告</span>
+                <span>11/09</span>
+              </div>
+            </swiper-slide>
+          </swiper>
+        </div>
+      </div>
+    </m-card>
+    <m-card icon="menu" title="新闻资讯"></m-card>
   </div>
 </template>
 
