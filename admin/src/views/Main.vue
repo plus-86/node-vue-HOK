@@ -62,7 +62,8 @@
       </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <!-- 创建和编辑用的是同一个页面， 所以编辑跳到创建页不会重载页面， 给router-view加上一个key绑定路由路径，当key发生变化时，页面就会重载-->
+        <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
   </el-container>
