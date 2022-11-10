@@ -33,5 +33,78 @@ module.exports = app => {
         res.send(newsList)
     })
 
+
+    router.get('/news/list', async (req, res) => {
+        // 找到新闻分类category，
+
+
+        // 填充一个属性名为children的虚拟类
+        // 用新闻分类category的_id值去匹配Category模型parent的值
+        // 匹配上了就把category填充到children字段
+
+
+        // 再根据每个children对象的_id值去匹配Article模型的categories的值
+        // 匹配上了就把article填充到newsList字段
+
+        // const parent = await Category.findOne({
+        //     name: '新闻分类'
+        // }).populate({
+        //     path: 'children',
+        //     populate: {
+        //         path: 'newsList'
+        //     }
+        // }).lean()
+
+
+
+        const parent = await Category.findOne({
+            name: '新闻分类'
+        })
+        // 聚合查询,接收一个数组叫聚合管道，里面可以定义多种操作
+        const cats = await Category.aggregate([
+            // 用新闻分类的_id值去匹配Category模型的parent值
+            { $match: { parent: parent._id } },
+            {
+                // 根据$match找到的categories的_id，
+                // 去跟articles集合里的每一项的categories做匹配
+                // 把匹配上的categories放到$match找到的categories的newsList字段里
+                $lookup: {
+                    from: 'articles',
+                    localField: '_id',
+                    foreignField: 'categories',
+                    as: 'newsList'
+                }
+            },
+            {
+                // 在$match找到的categories里添加字段
+                $addFields: {
+                    // 添加一个名为newsList的字段(实际上是覆盖)
+                    // 取newsList字段下的5项，覆盖到newsList里
+                    newsList: { $slice: ['$newsList', 5] }
+                }
+            }
+        ])
+        const subCats = cats.map(v => v._id)
+        // 给cats的第一项增加热门分类
+        cats.unshift({
+            name: '热门',
+            newsList: await Article.find().where({
+                // 找到Article里categories字段(数组)匹配上subCats数组(新闻分类下的四个分类数组的_id)的子项，插入5条到newsList
+                categories: { $in: subCats }
+            }).populate('categories').limit(5).lean()
+        })
+        // newList 每项加上categoryName
+        cats.map(cat => {
+            cat.newsList.map(news => {
+                // 给热门分类的categoryName改名
+                news.categoryName = cat.name === '热门' ? news.categories[0].name : cat.name
+                return news
+            })
+            return cat
+        })
+        res.send(cats)
+    })
+
+
     app.use('/web/api', router)
 }
