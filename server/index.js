@@ -15,9 +15,13 @@ app.use(cors)
 
 
 // 小技巧
+require('./plugins/db')(app)
+
 require('./routes/admin')(app)
 
-require('./plugins/db')(app)
+require('./routes/web')(app)
+
+
 
 app.set('APPSECRET', process.env.APPSECRET)
 
