@@ -82,6 +82,14 @@ a {
   }
 }
 
+// text overflow
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  white-space: nowrap;
+}
+
 // sprite
 // 把所有图标放到一张图片上
 // 通过spritecow去获取图标的位置，并截取

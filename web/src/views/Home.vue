@@ -46,11 +46,17 @@
       <!-- 获取子组件内，名为items的具名插槽所绑定的attr category -->
       <template #items="{ category }">
         <!-- 遍历 category.newsList 渲染每一页幻灯片的新闻-->
-        <div class="py-2" v-for="(item, i) in category.newsList" :key="i">
-          <span>[{{ item.categoryName }}]</span>
-          <span>|</span>
-          <span>{{ item.title }}</span>
-          <span>{{ item.date }}</span>
+        <div
+          class="py-2 fs-lg d-flex"
+          v-for="(item, i) in category.newsList"
+          :key="i"
+        >
+          <span class="text-info">[{{ item.categoryName }}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{
+            item.title
+          }}</span>
+          <span class="text-grey-1 fs-sm">{{ item.createdAt | date }}</span>
         </div>
       </template>
     </m-list-card>
@@ -58,161 +64,17 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
+import { getNewsCats } from '@/request/api'
 export default {
+  filters: {
+    date(val) {
+      return dayjs(val).format('MM/DD')
+    }
+  },
   data() {
     return {
-      newsCats: [
-        {
-          name: '热门',
-          newsList: [
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            }
-          ]
-        },
-        {
-          name: '新闻',
-          newsList: [
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            }
-          ]
-        },
-        {
-          name: '新闻',
-          newsList: [
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            }
-          ]
-        },
-        {
-          name: '新闻',
-          newsList: [
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            }
-          ]
-        },
-        {
-          name: '新闻',
-          newsList: [
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            },
-            {
-              categoryName: '公告',
-              title: '11月2日全服不停机更新公告',
-              date: '06/02'
-            }
-          ]
-        }
-      ],
+      newsCats: [],
       swiperOptions: {
         pagination: {
           el: '.pagination-home'
@@ -225,8 +87,14 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log()
+  methods: {
+    async fetchNewsCats() {
+      let res = await getNewsCats()
+      this.newsCats = res.data
+    }
+  },
+  created() {
+    this.fetchNewsCats()
   }
 }
 </script>
