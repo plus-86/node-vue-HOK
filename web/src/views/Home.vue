@@ -46,7 +46,9 @@
       <!-- 获取子组件内，名为items的具名插槽所绑定的attr category -->
       <template #items="{ category }">
         <!-- 遍历 category.newsList 渲染每一页幻灯片的新闻-->
-        <div
+        <router-link
+          tag="div"
+          :to="`/articles/${item._id}`"
           class="py-2 fs-lg d-flex"
           v-for="(item, i) in category.newsList"
           :key="i"
@@ -57,7 +59,7 @@
             item.title
           }}</span>
           <span class="text-grey-1 fs-sm">{{ item.createdAt | date }}</span>
-        </div>
+        </router-link>
       </template>
     </m-list-card>
 

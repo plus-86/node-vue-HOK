@@ -15,6 +15,7 @@ import ListCard from '@/components/ListCard.vue'
 Vue.component('m-list-card', ListCard)
 Vue.config.productionTip = false
 
+
 new Vue({
   router,
   store,

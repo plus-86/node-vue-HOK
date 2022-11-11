@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "159943",
+      "name": "back",
+      "font_class": "fenxiang",
+      "unicode": "f016f",
+      "unicode_decimal": 983407
+    },
+    {
       "icon_id": "1196941",
       "name": "menu",
       "font_class": "menu",
@@ -18,6 +25,13 @@
       "font_class": "menu1",
       "unicode": "e619",
       "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "21924072",
+      "name": "英雄详情",
+      "font_class": "yingxiongxiangqing",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
     }
   ]
 }
