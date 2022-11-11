@@ -3,7 +3,9 @@ import Vue from "vue";
 import router from "@/router/index";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/admin/api',
+    // 开发环境和生产环境的地址
+    // 生产环境只需要带绝对路径就可以访问
+    baseURL: process.env.VUE_APP_API_URL || '/admin/api',
     timeout: 5000
 })
 

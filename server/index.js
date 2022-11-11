@@ -7,6 +7,8 @@ const express = require('express')
 const app = express()
 // 使用express的static中间件,表示用户访问http://localhost:3000/uploads时,可以获取到项目uploads文件内所有静态资源
 app.use('/uploads', express.static(__dirname + '/uploads'))
+app.use('/admin', express.static(__dirname + '/admin'))
+app.use('/', express.static(__dirname + '/web'))
 
 //解析json
 app.use(express.json())
