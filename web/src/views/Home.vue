@@ -66,7 +66,9 @@
     <m-list-card icon="menu" title="英雄列表" :categories="heroCats">
       <template #items="{ category }">
         <div class="d-flex flex-wrap" style="margin: 0 -0.5rem">
-          <div
+          <router-link
+            tag="div"
+            :to="`/heroes/${item._id}`"
             v-for="(item, i) in category.heroList"
             :key="i"
             class="p-2 text-center"
@@ -74,7 +76,7 @@
           >
             <img class="w-100" :src="item.avatar" alt="" />
             <div>{{ item.name }}</div>
-          </div>
+          </router-link>
         </div>
       </template>
     </m-list-card>

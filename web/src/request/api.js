@@ -7,3 +7,6 @@ export const getHeroCats = () => instance.get('/heroes/list')
 
 // 获取文章详情
 export const getArticleById = (id) => instance.get(`/articles/${id}`)
+
+// 获取文章详情
+export const getHeroById = (id) => instance.get(`/heroes/${id}`)

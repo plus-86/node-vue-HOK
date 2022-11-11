@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const heroSchema = new mongoose.Schema({
     name: { type: String },
     avatar: { type: String },
+    banner: { type: String },
     title: { type: String },
     // 英雄分类关联到Category表,一个英雄可能属于多个分类所以是数组
     categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }],
@@ -19,6 +20,8 @@ const heroSchema = new mongoose.Schema({
         name: { type: String },
         description: { type: String },
         tips: { type: String },
+        cooldown: { type: String },
+        consume: { type: String },
     }],
     // 顺风/逆风出装
     items1: [{
