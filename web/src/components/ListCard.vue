@@ -23,6 +23,7 @@
         <!-- 实例内有个索引值 -->
         <!-- 赋值给active实现滑动幻灯片同时改变类别高亮功能 -->
         <swiper
+          :options="{ autoHeight: true }"
           ref="list"
           @slide-change="() => (active = $refs.list.swiperInstance.realIndex)"
         >

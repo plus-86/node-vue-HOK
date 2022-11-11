@@ -41,4 +41,4 @@ const heroSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Hero', heroSchema)
+module.exports = mongoose.model('Hero', heroSchema, 'heroes') // mongoose默认创建的集合名只会在单词后面加个s表示复数，不合理，所以用第三个参数自定义集合名称

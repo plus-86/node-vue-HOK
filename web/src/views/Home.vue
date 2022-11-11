@@ -60,12 +60,28 @@
         </div>
       </template>
     </m-list-card>
+
+    <m-list-card icon="menu" title="英雄列表" :categories="heroCats">
+      <template #items="{ category }">
+        <div class="d-flex flex-wrap" style="margin: 0 -0.5rem">
+          <div
+            v-for="(item, i) in category.heroList"
+            :key="i"
+            class="p-2 text-center"
+            style="width: 20%"
+          >
+            <img class="w-100" :src="item.avatar" alt="" />
+            <div>{{ item.name }}</div>
+          </div>
+        </div>
+      </template>
+    </m-list-card>
   </div>
 </template>
 
 <script>
 import dayjs from 'dayjs'
-import { getNewsCats } from '@/request/api'
+import { getNewsCats, getHeroCats } from '@/request/api'
 export default {
   filters: {
     date(val) {
@@ -74,6 +90,7 @@ export default {
   },
   data() {
     return {
+      heroCats: [],
       newsCats: [],
       swiperOptions: {
         pagination: {
@@ -91,10 +108,15 @@ export default {
     async fetchNewsCats() {
       let res = await getNewsCats()
       this.newsCats = res.data
+    },
+    async fetchHeroCats() {
+      let res = await getHeroCats()
+      this.heroCats = res.data
     }
   },
   created() {
     this.fetchNewsCats()
+    this.fetchHeroCats()
   }
 }
 </script>
