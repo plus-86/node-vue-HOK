@@ -25,7 +25,7 @@ require('./routes/web')(app)
 
 
 
-app.set('APPSECRET', process.env.APPSECRET)
+app.set('APPSECRET', 'ljsdjdfkjsfklsjdlkfjdsl')
 
 
 const PORT = process.env.PORT || 3001
