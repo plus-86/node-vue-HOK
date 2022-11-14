@@ -12,7 +12,6 @@ test/e2e/reports
 selenium-debug.log
 
 
-uploads/
 # Editor directories and files
 .idea
 .vscode
