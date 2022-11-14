@@ -28,7 +28,7 @@ require('./routes/web')(app)
 app.set('APPSECRET', 'ljsdjdfkjsfklsjdlkfjdsl')
 
 
-const PORT = process.env.PORT || 3001
+const PORT = 3000
 
 app.listen(PORT, () => {
     console.log(`Node is listening port ${PORT}...`);
